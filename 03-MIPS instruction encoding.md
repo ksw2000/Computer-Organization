@@ -63,6 +63,8 @@
 
 ### ii. lw
 
+以 `$s3` 的值加 40 後得到的位址為基準，將含基準的連續4個bytes 丟進 `$t8`
+
 `lw $t8, 40($s3)`
 
 | opcode | 第 2 個 base |   第 1 個   | 位移量立即值 |
@@ -95,7 +97,7 @@ $$
 
 Target address calculation on jump
 
-`J SKIP` 這而在`18000004` 
+`J SKIP` 這行若在`18000004` 
 
 而 SKIP 在 `1800001C`
 
@@ -107,3 +109,9 @@ Target address calculation on jump
 |:-------:|:--------------------------------:|
 | 0000 10 | 10 0000 0000 0000 0000 0000 0111 |
 
++ procedure call: jump and link `jal procedureLabel`
+  + address of following insturction put in `$ra` (將下一行指令位置放入 `$ra`)
+  + jump to target address.
++ procedure return: `jr $ra`
+  + Copies `$ra`to program counter
+  + can also be used for computed jumps, e.g., for case/switch statements.
