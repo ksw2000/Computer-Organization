@@ -22,27 +22,33 @@
 
 `add $t0, $s1, $s2`
 
-| 只有兩種    | 第2個   | 第3個   | <mark>第1個</mark> | 空     | opcode |
+| opcode | 第2個   | 第3個   | <mark>第1個</mark> | shift amount | function code |
 |:-------:|:-----:|:-----:|:----------------:|:-----:|:------:|
-| special | $s1   | $s2   | $t0              | 0     | add    |
+| special | \$s1 | \$s2          | \$t0 | 0   |add|
 | 000000  | 10001 | 10010 | 01000            | 00000 | 100000 |
 
 ### ii-i. Shift type 1 (有立即值), sll, srl
 
-`sll $t0, $s1, 2`
++ sll: shift left logical
++ srl: shift right logical
 
-| 只有兩種    | 空     | 第2個   | <mark>第1個</mark> | num   | opcode |
+`srl $t0, $s1, 2`
+
+| opcode | 空     | 第2個   | <mark>第1個</mark> | num   | function code |
 |:-------:|:-----:|:-----:|:----------------:|:-----:|:------:|
-| special | 0     | $s1   | $t0              | 2     | sll    |
-| 000000  | 00000 | 10001 | 01000            | 00010 |        |
+| special | 0     | \$s1            | \$t0 | 2   |srl|
+| 000000  | 00000 | 10001 | 01000            | 00010 | 000010 |
 
-### ii-ii Shift type 2 (沒有立即值) sllv, slrv
+### ii-ii Shift type 2 (沒有立即值) sllv, srlv
+
++ sllv: shift left logical variable
++ slrv: shift right logical variable
 
 `sllv $t0, $s1, $s0`
 
 | 只有兩種    | 第3個   | 第2個   | <mark>**第1個**</mark> | 空     | opcode |
 |:-------:|:-----:|:-----:|:--------------------:|:-----:|:------:|
-| special | $s0   | $s1   | $t0                  | 0     | sllv   |
+| special | \$s0 | \$s1             | \$t0 | 0  |sllv|
 | 000000  | 10000 | 10001 | 01000                | 00000 | 000110 |
 
 ## Format I
@@ -100,5 +106,4 @@ Target address calculation on jump
 | opcode  | address                          |
 |:-------:|:--------------------------------:|
 | 0000 10 | 10 0000 0000 0000 0000 0000 0111 |
-
 
